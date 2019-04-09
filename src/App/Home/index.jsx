@@ -1,5 +1,6 @@
 import React from 'react'
+import { Heading } from 'grommet'
 
-const Home = () => <span>HOME</span>
+const Home = () => <Heading>HOME</Heading>
 
 export default Home
