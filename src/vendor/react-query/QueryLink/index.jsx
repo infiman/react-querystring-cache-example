@@ -1,11 +1,22 @@
 import React from 'react'
 
-import { Consumer } from '../QueryContext'
+import { QueryContext } from '../Query'
 
-const QueryLink = React.memo(({ to, children }) => (
-  <Consumer>
-    {queryStore => children({ to: queryStore.resolveQueryString(to) })}
-  </Consumer>
-))
+const QueryLink = ({ pathname, children, add, remove }) => {
+  const { queryStore } = React.useContext(QueryContext)
+
+  return children({
+    path: {
+      state: {
+        __query__: {}
+      },
+      pathname,
+      search: queryStore.resolveQueryString(pathname, {
+        add,
+        remove
+      })
+    }
+  })
+}
 
 export default QueryLink
