@@ -9,14 +9,6 @@ import Card from './Card'
 const Explore = ({ match, location, history }) => (
   <>
     <Heading>Explore</Heading>
-    <QueryLink pathname="/">
-      {({ path }) => (
-        <Link to={path}>
-          <Anchor as="span">Home</Anchor>
-        </Link>
-      )}
-    </QueryLink>
-    |
     <QueryLink pathname="/explore/bla" add={{ some: 'string' }}>
       {({ path }) => (
         <Link to={path}>
