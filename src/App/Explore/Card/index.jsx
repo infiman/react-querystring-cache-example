@@ -2,7 +2,7 @@ import React from 'react'
 import { Heading, Anchor } from 'grommet'
 import { Link } from 'react-router-dom'
 
-import QueryLink from '../../../vendor/react-query/QueryLink'
+import QueryLink from '../../../vendor/react-querystring-cache/QueryLink'
 
 const Card = ({
   match: {
@@ -15,7 +15,7 @@ const Card = ({
     <QueryLink pathname="/explore">
       {({ path }) => (
         <Link to={path}>
-          <Anchor as="span">BACK</Anchor>
+          <Anchor as="span">Back</Anchor>
         </Link>
       )}
     </QueryLink>
