@@ -3,11 +3,12 @@ import { Helmet } from 'react-helmet'
 import qs from 'qs'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { Grommet, Box, Anchor } from 'grommet'
-import { Inherit } from 'grommet-icons'
+import { Inherit, Menu } from 'grommet-icons'
 
 import QuerystringCache from '../vendor/react-querystring-cache/QuerystringCache'
 import QueryLink from '../vendor/react-querystring-cache/QueryLink'
 
+import Search from './components/Search'
 import Home from './Home'
 import Explore from './Explore'
 
@@ -27,48 +28,68 @@ const QUERYSTRING_CACHE_OPTIONS = {
 }
 
 const App = () => (
-  <Router>
-    <QuerystringCache options={QUERYSTRING_CACHE_OPTIONS}>
-      <Helmet>
-        <link rel="shortcut icon" href={favicon} type="image/x-icon" />
-      </Helmet>
-      <Grommet>
-        <Box background="brand" pad="small" as="header">
-          <QueryLink pathname="/">
-            {({ path }) => (
-              <Link to={path}>
-                <Anchor
-                  icon={<Inherit size="large" />}
-                  as="span"
-                  size="xsmall"
-                />
-              </Link>
-            )}
-          </QueryLink>
-        </Box>
-        <Box background="light-2" as="main" flex="grow">
-          <Route path="/" exact component={Home} />
-          <Route path="/explore" component={Explore} />
-        </Box>
-        <Box background="light-4" pad="small" as="footer">
-          <QueryLink pathname="/">
-            {({ path }) => (
-              <Link to={path}>
-                <Anchor as="span">Home</Anchor>
-              </Link>
-            )}
-          </QueryLink>
-          <QueryLink pathname="/explore">
-            {({ path }) => (
-              <Link to={path}>
-                <Anchor as="span">Explore</Anchor>
-              </Link>
-            )}
-          </QueryLink>
-        </Box>
-      </Grommet>
-    </QuerystringCache>
-  </Router>
+  <>
+    <Helmet>
+      <link rel="shortcut icon" href={favicon} type="image/x-icon" />
+    </Helmet>
+    <Router>
+      <QuerystringCache options={QUERYSTRING_CACHE_OPTIONS}>
+        <Grommet>
+          <Box
+            direction="row"
+            background="brand"
+            pad="small"
+            as="header"
+            align="center"
+          >
+            <QueryLink pathname="/">
+              {({ path }) => (
+                <Link to={path}>
+                  <Anchor
+                    icon={<Inherit size="large" />}
+                    as="span"
+                    size="xsmall"
+                  />
+                </Link>
+              )}
+            </QueryLink>
+            <Search />
+            <QueryLink pathname="/">
+              {({ path }) => (
+                <Link to={path}>
+                  <Anchor
+                    icon={<Menu size="large" />}
+                    as="span"
+                    size="xsmall"
+                  />
+                </Link>
+              )}
+            </QueryLink>
+          </Box>
+          <Box background="light-2" as="main" flex="grow">
+            <Route path="/" exact component={Home} />
+            <Route path="/explore" component={Explore} />
+          </Box>
+          <Box background="light-4" pad="small" as="footer">
+            <QueryLink pathname="/">
+              {({ path }) => (
+                <Link to={path}>
+                  <Anchor as="span">Home</Anchor>
+                </Link>
+              )}
+            </QueryLink>
+            <QueryLink pathname="/explore">
+              {({ path }) => (
+                <Link to={path}>
+                  <Anchor as="span">Explore</Anchor>
+                </Link>
+              )}
+            </QueryLink>
+          </Box>
+        </Grommet>
+      </QuerystringCache>
+    </Router>
+  </>
 )
 
 export default App
