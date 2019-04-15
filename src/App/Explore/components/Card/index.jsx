@@ -11,10 +11,15 @@ const Card = ({ id, title, length, rating, video }) => (
     margin="medium"
     background="light-3"
     overflow="hidden"
-    elevation="medium"
+    elevation="small"
     round="medium"
   >
-    <QueryLink pathname={`/explore/${id}`}>
+    <QueryLink
+      pathname="/explore"
+      add={{
+        video: id
+      }}
+    >
       {({ path }) => (
         <Link to={path}>
           <Box width="small" height="small">
@@ -26,7 +31,13 @@ const Card = ({ id, title, length, rating, video }) => (
       )}
     </QueryLink>
     <Box width="medium" height="small" pad="small">
-      <QueryLink pathname={`/explore/${id}`}>
+      <QueryLink
+        scope="/explore"
+        pathname="/explore/page"
+        add={{
+          video: id
+        }}
+      >
         {({ path }) => (
           <Link to={path}>
             <Anchor as="span" size="medium">
@@ -36,9 +47,11 @@ const Card = ({ id, title, length, rating, video }) => (
         )}
       </QueryLink>
       <Box>
-        <Text size="small">{length}m</Text>
+        <Text size="small" weight="bold">
+          {length}m
+        </Text>
         <Box direction="row" align="center">
-          <Text margin={{ right: '10px' }} size="small">
+          <Text margin={{ right: '10px' }} size="small" weight="bold">
             Rating:
           </Text>
           <Meter
@@ -56,10 +69,26 @@ const Card = ({ id, title, length, rating, video }) => (
           />
         </Box>
       </Box>
-      <Paragraph size="small">
+      <Paragraph size="small" margin="0">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
       </Paragraph>
+      <QueryLink
+        scope="/explore"
+        pathname="/explore/page"
+        add={{
+          video: id,
+          feature: 'comments'
+        }}
+      >
+        {({ path }) => (
+          <Link to={path}>
+            <Anchor as="span" size="small">
+              Comment
+            </Anchor>
+          </Link>
+        )}
+      </QueryLink>
     </Box>
   </Box>
 )

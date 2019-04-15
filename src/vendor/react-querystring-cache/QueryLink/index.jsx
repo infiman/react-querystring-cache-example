@@ -10,23 +10,10 @@ const QueryLink = ({
   add,
   remove
 }) => {
-  const { queryStore } = React.useContext(QueryContext)
+  const { queryStore, resolvePath } = React.useContext(QueryContext)
 
   return children({
-    path: {
-      state: {
-        ...queryStore.createStateObject({
-          persist,
-          scope: scope || pathname,
-          mutation: { add, remove }
-        })
-      },
-      pathname,
-      search: queryStore.resolveQueryString(scope || pathname, {
-        add,
-        remove
-      })
-    }
+    path: resolvePath(queryStore, { persist, scope, pathname, add, remove })
   })
 }
 
