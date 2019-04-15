@@ -29,7 +29,7 @@ const Home = () => (
           <Heading size="large" textAlign="center">
             ...world never says “hello” back...
           </Heading>
-          <Paragraph textAlign="center" margin={{ bottom: '50px' }}>
+          <Paragraph textAlign="center" margin={{ bottom: '75px' }}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </Paragraph>
