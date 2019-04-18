@@ -14,8 +14,7 @@
     "react-helmet": "^5.2.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
-    "styled-components": "^4.2.0",
-    "uuid": "^3.3.2"
+    "styled-components": "^4.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -31,5 +30,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "serve": "^11.0.0"
+  }
 }

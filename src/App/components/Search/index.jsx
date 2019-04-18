@@ -5,27 +5,30 @@ import _ from 'lodash'
 
 import { QueryContext } from '../../../vendor/react-querystring-cache/QuerystringCache'
 
+const navigateQuery = _.debounce(
+  ({ history, queryStore, resolvePath, value }) =>
+    history.push(
+      resolvePath(queryStore, {
+        scope: '*',
+        pathname: '/explore',
+        add: { query: value }
+      })
+    ),
+  250
+)
+
 const Search = ({ history, location: { search } }) => {
   const { queryStore, resolvePath } = React.useContext(QueryContext)
   const { query } = queryStore.parseQueryString(search)
-  const navigate = _.debounce(
-    value =>
-      history.push(
-        resolvePath(queryStore, {
-          scope: '*',
-          pathname: '/explore',
-          add: { query: value }
-        })
-      ),
-    250
-  )
 
   return (
     <Box pad={{ horizontal: 'xlarge' }} flex="grow">
       <TextInput
         defaultValue={query || ''}
         placeholder="Search..."
-        onChange={({ target: { value } }) => navigate(value)}
+        onChange={({ target: { value } }) =>
+          navigateQuery({ history, queryStore, resolvePath, value })
+        }
       />
     </Box>
   )

@@ -25,7 +25,7 @@ const Card = ({ id, title, length, rating, video }) => (
       {({ path }) => (
         <Link to={path}>
           <Box width="small" height="small" background="dark-2">
-            <Video controls={false} fit="cover" autoPlay mute loop>
+            <Video controls={false} fit="cover" mute loop>
               <source key="video" src={video} type="video/mp4" />
             </Video>
           </Box>

@@ -5,31 +5,37 @@ import _ from 'lodash'
 
 import { QueryContext } from '../../../../vendor/react-querystring-cache/QuerystringCache'
 
+const navigateDuration = _.debounce(
+  ({ history, resolvePath, queryStore, value }) =>
+    history.push(
+      resolvePath(queryStore, {
+        pathname: '/explore',
+        add: { duration: value }
+      })
+    ),
+  250
+)
+
+const navigateRating = _.debounce(
+  ({ history, resolvePath, queryStore, values }) =>
+    history.push(
+      resolvePath(queryStore, {
+        pathname: '/explore',
+        remove: { rating: undefined },
+        add: { rating: values }
+      })
+    ),
+  250
+)
+
 const Filter = ({ history, location: { search } }) => {
   const { queryStore, resolvePath } = React.useContext(QueryContext)
-  const { duration, rating } = queryStore.parseQueryString(search)
-  const [ratingState, setRatingState] = React.useState(rating || [1, 5])
-  const [durationState, setDurationState] = React.useState(duration || 0)
-  const navigateDuration = _.debounce(
-    value =>
-      history.push(
-        resolvePath(queryStore, {
-          pathname: '/explore',
-          add: { duration: value }
-        })
-      ),
-    750
+  const { duration = 0, rating = [1, 5] } = queryStore.parseQueryString(search)
+  const [ratingState, setRatingState] = React.useState(
+    [parseInt(rating[0], 10), parseInt(rating[1], 10)] || [1, 5]
   )
-  const navigateRating = _.debounce(
-    values =>
-      history.push(
-        resolvePath(queryStore, {
-          pathname: '/explore',
-          remove: { rating: undefined },
-          add: { rating: values }
-        })
-      ),
-    750
+  const [durationState, setDurationState] = React.useState(
+    parseInt(duration, 10) || 0
   )
 
   return (
@@ -39,7 +45,7 @@ const Filter = ({ history, location: { search } }) => {
         value={durationState}
         onChange={({ target: { value } }) =>
           setDurationState(() => {
-            navigateDuration(value)
+            navigateDuration({ history, queryStore, resolvePath, value })
 
             return value
           })
@@ -64,7 +70,7 @@ const Filter = ({ history, location: { search } }) => {
           values={ratingState}
           onChange={values =>
             setRatingState(() => {
-              navigateRating(values)
+              navigateRating({ history, queryStore, resolvePath, values })
 
               return values
             })
