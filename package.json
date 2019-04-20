@@ -1,10 +1,10 @@
 {
-  "name": "furnace",
+  "name": "react-querystring-cache-example",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@infiman/querystring-cache": "^0.9.1",
-    "grommet": "^2.6.5",
+    "grommet": "^2.6.6",
     "grommet-icons": "^4.2.0",
     "lodash": "^4.17.11",
     "polished": "^3.2.0",
@@ -19,7 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "now-build": "react-scripts build",
+    "now-build": "npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
