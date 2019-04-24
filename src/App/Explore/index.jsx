@@ -19,7 +19,7 @@ const Explore = ({ history, match, location: { search, pathname } }) => {
     video: videoId,
     query = '',
     duration = '0',
-    rating: ratingRange = [1, 5]
+    rating: ratingRange = ['1', '5']
   } = queryStore.parseQueryString(search)
   const index = cards.findIndex(({ id }) => id === videoId)
   const { video } = cards[index] || {}

@@ -30,7 +30,7 @@ const navigateRating = _.debounce(
 
 const Filter = ({ history, location: { search } }) => {
   const { queryStore, resolvePath } = React.useContext(QueryContext)
-  const { duration = '0', rating = [1, 5] } = queryStore.parseQueryString(
+  const { duration = '0', rating = ['1', '5'] } = queryStore.parseQueryString(
     search
   )
   const [ratingState, setRatingState] = React.useState([
