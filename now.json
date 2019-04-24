@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "create-react-app",
+  "name": "react-querystring-cache-example",
   "builds": [
     {
       "src": "package.json",
