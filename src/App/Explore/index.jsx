@@ -17,22 +17,19 @@ const Explore = ({ history, match, location: { search, pathname } }) => {
   const [, , page] = pathname.split('/')
   const {
     video: videoId,
-    query,
-    duration,
-    rating: ratingRange
+    query = '',
+    duration = '0',
+    rating: ratingRange = [1, 5]
   } = queryStore.parseQueryString(search)
   const index = cards.findIndex(({ id }) => id === videoId)
   const { video } = cards[index] || {}
-  const filteredCards =
-    query || ratingRange || duration
-      ? cards.filter(
-          ({ title, length, rating }) =>
-            (query && title.includes(query)) ||
-            (duration && length >= parseInt(duration, 10)) ||
-            (ratingRange &&
-              (rating >= ratingRange[0] && rating <= ratingRange[1]))
-        )
-      : cards
+  const filteredCards = cards.filter(
+    ({ title, length, rating }) =>
+      title.includes(query) &&
+      length >= parseInt(duration, 10) &&
+      (rating >= parseInt(ratingRange[0], 10) &&
+        rating <= parseInt(ratingRange[1], 10))
+  )
 
   return (
     <>

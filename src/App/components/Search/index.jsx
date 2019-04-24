@@ -19,7 +19,7 @@ const navigateQuery = _.debounce(
 
 const Search = ({ history, location: { search } }) => {
   const { queryStore, resolvePath } = React.useContext(QueryContext)
-  const { query } = queryStore.parseQueryString(search)
+  const { query = '' } = queryStore.parseQueryString(search)
 
   return (
     <Box pad={{ horizontal: 'xlarge' }} flex="grow">

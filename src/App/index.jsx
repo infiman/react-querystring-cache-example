@@ -37,6 +37,7 @@ const App = () => (
         <Grommet>
           <Box
             direction="row"
+            flex={false}
             background="brand"
             pad="small"
             as="header"
