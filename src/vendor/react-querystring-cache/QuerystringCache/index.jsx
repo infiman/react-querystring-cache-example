@@ -4,47 +4,45 @@ import { createQueryStore } from '@infiman/querystring-cache'
 
 export const QueryContext = React.createContext({})
 
-const resolvePath = (
-  queryStore,
-  { persist, scope, pathname, add, remove }
-) => ({
+const resolvePath = (queryStore, { pathname, mutations, hash }) => ({
+  pathname,
+  search: queryStore.resolveQueryString(pathname, mutations),
+  hash,
   state: {
     ...queryStore.createStateObject({
-      persist,
-      scope: scope || pathname,
-      mutation: { add, remove }
+      mutations
     })
-  },
-  pathname,
-  search: queryStore.resolveQueryString(scope || pathname, {
-    add,
-    remove
-  })
+  }
 })
 
-const QuerystringCache = ({ history, children, options }) => {
-  const { queryStore } = React.useContext(QueryContext)
-  const [, setState] = React.useState()
-  React.useEffect(
-    () =>
-      history.listen(location => {
-        ;(queryStore || createQueryStore(options)).add(location)
+const QuerystringCache = React.memo(
+  ({ options, history, location, children }) => {
+    const context = React.useMemo(() => {
+      const queryStore = createQueryStore(options)
 
-        setState()
-      }),
-    []
-  )
+      return {
+        queryStore,
+        resolvePath: resolvePath.bind(null, queryStore)
+      }
+    }, [options])
+    const [, setUpdate] = React.useState(location.key)
 
-  return (
-    <QueryContext.Provider
-      value={{
-        resolvePath,
-        queryStore: queryStore || createQueryStore(options)
-      }}
-    >
-      {children}
-    </QueryContext.Provider>
-  )
-}
+    React.useEffect(
+      () =>
+        history.listen(location => {
+          context.queryStore.add(location)
+
+          setUpdate(location.key)
+        }),
+      [context.queryStore, history]
+    )
+
+    return (
+      <QueryContext.Provider value={{ ...context }}>
+        {children}
+      </QueryContext.Provider>
+    )
+  }
+)
 
 export default withRouter(QuerystringCache)

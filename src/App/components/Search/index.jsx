@@ -6,12 +6,11 @@ import _ from 'lodash'
 import { QueryContext } from '../../../vendor/react-querystring-cache/QuerystringCache'
 
 const navigateQuery = _.debounce(
-  ({ history, queryStore, resolvePath, value }) =>
+  ({ history, resolvePath, value }) =>
     history.push(
-      resolvePath(queryStore, {
-        scope: '*',
+      resolvePath({
         pathname: '/explore',
-        add: { query: value }
+        mutations: [{ scope: '/*', add: { query: value } }]
       })
     ),
   250
@@ -27,7 +26,7 @@ const Search = ({ history, location: { search } }) => {
         defaultValue={query || ''}
         placeholder="Search..."
         onChange={({ target: { value } }) =>
-          navigateQuery({ history, queryStore, resolvePath, value })
+          navigateQuery({ history, resolvePath, value })
         }
       />
     </Box>

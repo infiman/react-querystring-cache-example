@@ -16,12 +16,7 @@ const Card = ({ id, title, length, rating, video }) => (
     round="medium"
     height="small"
   >
-    <QueryLink
-      pathname="/explore"
-      add={{
-        video: id
-      }}
-    >
+    <QueryLink pathname="/explore" mutations={[{ add: { video: id } }]}>
       {({ path }) => (
         <Link to={path}>
           <Box width="small" height="small" background="dark-2">
@@ -40,11 +35,15 @@ const Card = ({ id, title, length, rating, video }) => (
     >
       <Box>
         <QueryLink
-          scope="/explore"
           pathname="/explore/page"
-          add={{
-            video: id
-          }}
+          mutations={[
+            {
+              scope: '/explore',
+              add: {
+                video: id
+              }
+            }
+          ]}
         >
           {({ path }) => (
             <Link to={path}>
@@ -84,12 +83,20 @@ const Card = ({ id, title, length, rating, video }) => (
       </Box>
       <Box alignSelf="end">
         <QueryLink
-          scope="/explore"
           pathname="/explore/page"
-          add={{
-            video: id,
-            feature: 'comments'
-          }}
+          mutations={[
+            {
+              add: {
+                feature: 'comments'
+              }
+            },
+            {
+              scope: '/explore',
+              add: {
+                video: id
+              }
+            }
+          ]}
         >
           {({ path }) => (
             <Link to={path}>

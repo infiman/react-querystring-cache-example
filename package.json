@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@infiman/querystring-cache": "^0.9.1",
+    "@infiman/querystring-cache": "^0.9.3",
     "grommet": "^2.6.6",
     "grommet-icons": "^4.2.0",
     "lodash": "^4.17.11",
@@ -13,7 +13,7 @@
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.0",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8",
+    "react-scripts": "3.0.0",
     "styled-components": "^4.2.0"
   },
   "scripts": {

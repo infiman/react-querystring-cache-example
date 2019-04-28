@@ -22,8 +22,7 @@ import cards from '../cards'
 
 const Page = ({ location: { search }, history }) => {
   const { queryStore, resolvePath } = React.useContext(QueryContext)
-  const back = () =>
-    history.push(resolvePath(queryStore, { pathname: '/explore' }))
+  const back = () => history.push(resolvePath({ pathname: '/explore' }))
   const { video: videoId, feature } = queryStore.parseQueryString(search)
   const index = cards.findIndex(({ id }) => id === videoId)
   const { title, length, rating, video } = cards[index] || {}
@@ -116,9 +115,11 @@ const Page = ({ location: { search }, history }) => {
             {feature !== 'comments' && (
               <QueryLink
                 pathname="/explore/page"
-                add={{
-                  feature: 'comments'
-                }}
+                mutations={[
+                  {
+                    add: { feature: 'comments' }
+                  }
+                ]}
               >
                 {({ path }) => (
                   <Link to={path}>

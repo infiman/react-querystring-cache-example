@@ -12,7 +12,7 @@ import Page from './Page'
 
 import cards from './cards'
 
-const Explore = ({ history, match, location: { search, pathname } }) => {
+const Explore = ({ match, location: { search, pathname } }) => {
   const { queryStore } = React.useContext(QueryContext)
   const [, , page] = pathname.split('/')
   const {

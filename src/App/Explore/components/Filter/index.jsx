@@ -6,23 +6,27 @@ import _ from 'lodash'
 import { QueryContext } from '../../../../vendor/react-querystring-cache/QuerystringCache'
 
 const navigateDuration = _.debounce(
-  ({ history, resolvePath, queryStore, value }) =>
+  ({ history, resolvePath, value }) =>
     history.push(
-      resolvePath(queryStore, {
+      resolvePath({
         pathname: '/explore',
-        add: { duration: value }
+        mutations: [{ add: { duration: value } }]
       })
     ),
   250
 )
 
 const navigateRating = _.debounce(
-  ({ history, resolvePath, queryStore, values }) =>
+  ({ history, resolvePath, values }) =>
     history.push(
-      resolvePath(queryStore, {
+      resolvePath({
         pathname: '/explore',
-        remove: { rating: undefined },
-        add: { rating: values }
+        mutations: [
+          {
+            remove: { rating: undefined },
+            add: { rating: values }
+          }
+        ]
       })
     ),
   250
@@ -48,7 +52,7 @@ const Filter = ({ history, location: { search } }) => {
         value={durationState}
         onChange={({ target: { value } }) =>
           setDurationState(() => {
-            navigateDuration({ history, queryStore, resolvePath, value })
+            navigateDuration({ history, resolvePath, value })
 
             return value
           })
@@ -73,7 +77,7 @@ const Filter = ({ history, location: { search } }) => {
           values={ratingState}
           onChange={values =>
             setRatingState(() => {
-              navigateRating({ history, queryStore, resolvePath, values })
+              navigateRating({ history, resolvePath, values })
 
               return values
             })

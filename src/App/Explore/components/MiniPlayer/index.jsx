@@ -20,7 +20,10 @@ const MiniPlayer = ({ video, location: { search } }) => {
       background="dark-2"
       key={queryStore.parseQueryString(search).video}
     >
-      <QueryLink pathname="/explore" remove={{ video: undefined }}>
+      <QueryLink
+        pathname="/explore"
+        mutations={[{ remove: { video: undefined } }]}
+      >
         {({ path }) => (
           <Link to={path}>
             <Box style={{ position: 'fixed', zIndex: 2 }} margin="small">
