@@ -7,10 +7,11 @@ import { QueryContext } from '../../../vendor/react-querystring-cache/Querystrin
 
 const navigateQuery = _.debounce(
   ({ history, resolvePath, value }) =>
+    value &&
     history.push(
       resolvePath({
         pathname: '/explore',
-        mutations: [{ scope: '/*', add: { query: value } }]
+        mutations: [{ persist: true, scope: '/*', add: { query: value } }]
       })
     ),
   250

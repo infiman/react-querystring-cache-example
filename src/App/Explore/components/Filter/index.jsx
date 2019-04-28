@@ -1,5 +1,13 @@
 import React from 'react'
-import { Box, RangeSelector, Stack, Text, Heading, RangeInput } from 'grommet'
+import {
+  Box,
+  RangeSelector,
+  Stack,
+  Text,
+  Heading,
+  RangeInput,
+  Button
+} from 'grommet'
 import { withRouter } from 'react-router-dom'
 import _ from 'lodash'
 
@@ -10,7 +18,7 @@ const navigateDuration = _.debounce(
     history.push(
       resolvePath({
         pathname: '/explore',
-        mutations: [{ add: { duration: value } }]
+        mutations: [{ persist: true, add: { duration: value } }]
       })
     ),
   250
@@ -23,6 +31,7 @@ const navigateRating = _.debounce(
         pathname: '/explore',
         mutations: [
           {
+            persist: true,
             remove: { rating: undefined },
             add: { rating: values }
           }
@@ -37,24 +46,54 @@ const Filter = ({ history, location: { search } }) => {
   const { duration = '0', rating = ['1', '5'] } = queryStore.parseQueryString(
     search
   )
-  const [ratingState, setRatingState] = React.useState([
-    parseInt(rating[0], 10),
-    parseInt(rating[1], 10)
-  ])
-  const [durationState, setDurationState] = React.useState(
-    parseInt(duration, 10)
-  )
+  const [
+    { duration: durationState, rating: ratingState },
+    setFilterState
+  ] = React.useState({
+    duration: parseInt(duration, 10),
+    rating: [parseInt(rating[0], 10), parseInt(rating[1], 10)]
+  })
 
   return (
     <Box>
+      <Box direction="row">
+        <Button
+          primary
+          label={
+            <Text weight="bold" size="large">
+              RESET FILTER
+            </Text>
+          }
+          onClick={() =>
+            setFilterState(() => {
+              history.push(
+                resolvePath({
+                  pathname: '/explore',
+                  mutations: [
+                    {
+                      persist: true,
+                      remove: { duration: undefined, rating: undefined }
+                    }
+                  ]
+                })
+              )
+
+              return {
+                duration: 0,
+                rating: [1, 5]
+              }
+            })
+          }
+        />
+      </Box>
       <Heading level={3}>Duration(>=):</Heading>
       <RangeInput
         value={durationState}
         onChange={({ target: { value } }) =>
-          setDurationState(() => {
+          setFilterState(() => {
             navigateDuration({ history, resolvePath, value })
 
-            return value
+            return { duration: value }
           })
         }
       />
@@ -76,10 +115,10 @@ const Filter = ({ history, location: { search } }) => {
           round="small"
           values={ratingState}
           onChange={values =>
-            setRatingState(() => {
+            setFilterState(() => {
               navigateRating({ history, resolvePath, values })
 
-              return values
+              return { rating: values }
             })
           }
         />

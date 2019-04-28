@@ -16,15 +16,21 @@ const resolvePath = (queryStore, { pathname, mutations, hash }) => ({
 })
 
 const QuerystringCache = React.memo(
-  ({ options, history, location, children }) => {
+  ({ options, history, location, children, persist }) => {
     const context = React.useMemo(() => {
-      const queryStore = createQueryStore(options)
+      const initialCache = persist
+        ? JSON.parse(global.localStorage.getItem('querystring-cache'))
+        : {}
+      const queryStore = createQueryStore({
+        initialCache,
+        ...options
+      })
 
       return {
         queryStore,
         resolvePath: resolvePath.bind(null, queryStore)
       }
-    }, [options])
+    }, [options, persist])
     const [, setUpdate] = React.useState(location.key)
 
     React.useEffect(
@@ -32,9 +38,16 @@ const QuerystringCache = React.memo(
         history.listen(location => {
           context.queryStore.add(location)
 
+          if (persist) {
+            global.localStorage.setItem(
+              'querystring-cache',
+              context.queryStore.toString()
+            )
+          }
+
           setUpdate(location.key)
         }),
-      [context.queryStore, history]
+      [context.queryStore, history, persist]
     )
 
     return (
