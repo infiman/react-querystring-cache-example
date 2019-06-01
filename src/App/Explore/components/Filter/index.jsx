@@ -8,7 +8,7 @@ import {
   RangeInput,
   Button
 } from 'grommet'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import _ from 'lodash'
 
 import { QueryContext } from '../../../../vendor/react-querystring-cache/QuerystringCache'
@@ -56,7 +56,10 @@ const Filter = ({ history, location: { search } }) => {
 
   return (
     <Box>
-      <Box direction="row">
+      <Box>
+        <Link to="/explore/page?video=7a4af374-da90-44bb-9224-97176f881a17">
+          5 Problems Everyone Has With DOG – How To Solved Them
+        </Link>
         <Button
           primary
           label={

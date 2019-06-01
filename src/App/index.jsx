@@ -26,7 +26,7 @@ const QUERYSTRING_CACHE_OPTIONS = {
 
 const App = () => (
   <Router>
-    <QuerystringCache options={QUERYSTRING_CACHE_OPTIONS}>
+    <QuerystringCache options={QUERYSTRING_CACHE_OPTIONS} respect replace>
       <Grommet>
         <Box
           direction="row"
