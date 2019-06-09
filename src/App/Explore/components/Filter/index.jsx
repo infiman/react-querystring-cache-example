@@ -10,8 +10,7 @@ import {
 } from 'grommet'
 import { withRouter, Link } from 'react-router-dom'
 import _ from 'lodash'
-
-import { QueryContext } from '../../../../vendor/react-querystring-cache/QuerystringCache'
+import { QueryContext } from '@infiman/querystring-cache'
 
 const navigateDuration = _.debounce(
   ({ history, resolvePath, value }) =>

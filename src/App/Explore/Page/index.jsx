@@ -14,9 +14,7 @@ import {
 } from 'grommet'
 import { ChatOption, Contract } from 'grommet-icons'
 import { Link } from 'react-router-dom'
-
-import { QueryContext } from '../../../vendor/react-querystring-cache/QuerystringCache'
-import QueryLink from '../../../vendor/react-querystring-cache/QueryLink'
+import { QueryContext, QueryLink } from '@infiman/querystring-cache'
 
 import cards from '../cards'
 

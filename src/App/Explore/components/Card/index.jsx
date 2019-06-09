@@ -2,8 +2,7 @@ import React from 'react'
 import { Box, Video, Text, Anchor, Paragraph, Meter } from 'grommet'
 import { Chat } from 'grommet-icons'
 import { Link } from 'react-router-dom'
-
-import QueryLink from '../../../../vendor/react-querystring-cache/QueryLink'
+import { QueryLink } from '@infiman/querystring-cache'
 
 const Card = ({ id, title, length, rating, video }) => (
   <Box

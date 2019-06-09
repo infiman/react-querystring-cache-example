@@ -1,11 +1,14 @@
 import React from 'react'
 import qs from 'qs'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  withRouter
+} from 'react-router-dom'
 import { Grommet, Box, Anchor } from 'grommet'
 import { Inherit, Menu } from 'grommet-icons'
-
-import QuerystringCache from '../vendor/react-querystring-cache/QuerystringCache'
-import QueryLink from '../vendor/react-querystring-cache/QueryLink'
+import { Query, QueryLink } from '@infiman/querystring-cache'
 
 import Search from './components/Search'
 import Home from './Home'
@@ -24,9 +27,11 @@ const QUERYSTRING_CACHE_OPTIONS = {
   stringifyQueryParams: queryParams => qs.stringify(queryParams, QS_CONFIG)
 }
 
+const QueryWithHistory = withRouter(Query)
+
 const App = () => (
   <Router>
-    <QuerystringCache options={QUERYSTRING_CACHE_OPTIONS} respect replace>
+    <QueryWithHistory options={QUERYSTRING_CACHE_OPTIONS} respect replace>
       <Grommet>
         <Box
           direction="row"
@@ -77,7 +82,7 @@ const App = () => (
           </QueryLink>
         </Box>
       </Grommet>
-    </QuerystringCache>
+    </QueryWithHistory>
   </Router>
 )
 
