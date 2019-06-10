@@ -2,7 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Box, Grid, Heading } from 'grommet'
 import { Route } from 'react-router-dom'
-import { QueryContext } from '@infiman/querystring-cache'
+import { QueryContext, QueryParams } from '@infiman/querystring-cache'
 
 import MiniPlayer from './components/MiniPlayer'
 import Card from './components/Card'
@@ -31,7 +31,7 @@ const Explore = ({ match, location: { search, pathname } }) => {
   )
 
   return (
-    <>
+    <QueryParams scope={match.path} params={['video', 'duration', 'rating']}>
       <Helmet>
         <title>Explore</title>
       </Helmet>
@@ -56,8 +56,8 @@ const Explore = ({ match, location: { search, pathname } }) => {
           </Box>
         </Box>
       </Grid>
-      <Route path={`${match.url}/page`} component={Page} />
-    </>
+      <Route path={`${match.path}/page`} component={Page} />
+    </QueryParams>
   )
 }
 

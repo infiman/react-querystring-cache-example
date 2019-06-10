@@ -14,11 +14,15 @@ import {
 } from 'grommet'
 import { ChatOption, Contract } from 'grommet-icons'
 import { Link } from 'react-router-dom'
-import { QueryContext, QueryLink } from '@infiman/querystring-cache'
+import {
+  QueryContext,
+  QueryLink,
+  QueryParams
+} from '@infiman/querystring-cache'
 
 import cards from '../cards'
 
-const Page = ({ location: { search }, history }) => {
+const Page = ({ match, location: { search }, history }) => {
   const { queryStore, resolvePath } = React.useContext(QueryContext)
   const back = () => history.push(resolvePath({ pathname: '/explore' }))
   const { video: videoId, feature } = queryStore.parseQueryString(search)
@@ -26,7 +30,7 @@ const Page = ({ location: { search }, history }) => {
   const { title, length, rating, video } = cards[index] || {}
 
   return (
-    <>
+    <QueryParams scope={match.path} params={['comments']}>
       <Helmet>
         <title>{title}</title>
       </Helmet>
@@ -150,7 +154,7 @@ const Page = ({ location: { search }, history }) => {
           </Box>
         </Grid>
       </Layer>
-    </>
+    </QueryParams>
   )
 }
 
