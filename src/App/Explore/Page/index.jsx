@@ -18,7 +18,7 @@ import {
   QueryContext,
   QueryLink,
   QueryParams
-} from '@infiman/querystring-cache'
+} from '@infiman/react-router-querystring'
 
 import cards from '../cards'
 

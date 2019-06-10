@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Video, Anchor } from 'grommet'
 import { Close, Expand } from 'grommet-icons'
 import { Link, withRouter } from 'react-router-dom'
-import { QueryContext, QueryLink } from '@infiman/querystring-cache'
+import { QueryContext, QueryLink } from '@infiman/react-router-querystring'
 
 const MiniPlayer = ({ video, location: { search } }) => {
   const { queryStore } = React.useContext(QueryContext)

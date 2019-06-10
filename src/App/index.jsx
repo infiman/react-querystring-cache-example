@@ -8,7 +8,11 @@ import {
 } from 'react-router-dom'
 import { Grommet, Box, Anchor } from 'grommet'
 import { Inherit, Menu } from 'grommet-icons'
-import { Query, QueryLink, QueryParams } from '@infiman/querystring-cache'
+import {
+  Query,
+  QueryLink,
+  QueryParams
+} from '@infiman/react-router-querystring'
 
 import Search from './components/Search'
 import Home from './Home'

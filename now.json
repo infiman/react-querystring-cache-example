@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "react-querystring-cache-example",
+  "name": "react-router-querystring-example",
   "builds": [
     {
       "src": "package.json",

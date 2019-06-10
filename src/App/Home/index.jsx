@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet'
 import { Box, Video, Button, Text, Stack, Heading, Paragraph } from 'grommet'
 import { LinkNext } from 'grommet-icons'
 import { Link } from 'react-router-dom'
-import { QueryLink } from '@infiman/querystring-cache'
+import { QueryLink } from '@infiman/react-router-querystring'
 
 import homeVideo from '../assets/home.mp4'
 

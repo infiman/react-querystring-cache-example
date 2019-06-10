@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, TextInput } from 'grommet'
 import { withRouter } from 'react-router-dom'
 import _ from 'lodash'
-import { QueryContext } from '@infiman/querystring-cache'
+import { QueryContext } from '@infiman/react-router-querystring'
 
 const navigateQuery = _.debounce(
   ({ history, resolvePath, value }) =>

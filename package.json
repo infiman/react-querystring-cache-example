@@ -1,9 +1,9 @@
 {
-  "name": "react-querystring-cache-example",
+  "name": "react-router-querystring-example",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@infiman/querystring-cache": "^0.9.10",
+    "@infiman/react-router-querystring": "^1.0.0-1",
     "grommet": "^2.6.6",
     "grommet-icons": "^4.2.0",
     "lodash": "^4.17.11",

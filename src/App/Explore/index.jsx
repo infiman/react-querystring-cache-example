@@ -2,7 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Box, Grid, Heading } from 'grommet'
 import { Route } from 'react-router-dom'
-import { QueryContext, QueryParams } from '@infiman/querystring-cache'
+import { QueryContext, QueryParams } from '@infiman/react-router-querystring'
 
 import MiniPlayer from './components/MiniPlayer'
 import Card from './components/Card'

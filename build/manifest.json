@@ -1,6 +1,6 @@
 {
-  "short_name": "react-querystring-cache-example",
-  "name": "querystring-cache usage example",
+  "short_name": "react-router-querystring-example",
+  "name": "react-router-querystring example",
   "icons": [
     {
       "src": "favicon.ico",
